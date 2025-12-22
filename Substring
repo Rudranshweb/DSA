@@ -1,0 +1,23 @@
+public class Substring{
+
+    public static String substring(String str, int si, int ei) {
+        if (si < 0 || ei > str.length() || si > ei) {
+            return "error in code of out of bound";
+        }
+        String res = "";
+        for (int i = si; i <= ei; i++) {
+            res += str.charAt(i);
+        }
+        return res;
+    }
+
+    public static void main(String[] args) {
+        String str = "HelloWorld";
+
+        int si = 2;
+        int ei = 6;
+
+        String result = substring(str, si, ei);
+        System.out.println("Substring is: " + result);
+    }
+}
