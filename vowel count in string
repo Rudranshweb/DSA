@@ -1,0 +1,21 @@
+public class VowelCountTest {
+
+    public static int vowelcount(String v) {
+        int count = 0;
+        for (int i = 0; i < v.length(); i++) {
+            if (v.charAt(i) == 'a' || v.charAt(i) == 'e' ||
+                v.charAt(i) == 'i' || v.charAt(i) == 'o' ||
+                v.charAt(i) == 'u') {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    public static void main(String[] args) {
+        String str = "hello world";
+
+        int result = vowelcount(str);
+        System.out.println("Number of vowels: " + result);
+    }
+}
