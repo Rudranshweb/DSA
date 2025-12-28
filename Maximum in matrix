@@ -1,0 +1,22 @@
+public class MaxInMatrix {
+
+    public static void max(int matrix[][]) {
+        int max = Integer.MIN_VALUE;
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[0].length; j++) {
+                if (max < matrix[i][j]) {
+                    max = matrix[i][j];
+                }
+            }
+        }
+        System.out.println("max is " + max);
+    }
+    public static void main(String[] args) {
+        int matrix[][] = {
+            {10, 20, 30},
+            {5,  50, 15},
+            {25, 40, 35}
+        };
+        max(matrix);   
+    }
+}
