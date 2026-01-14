@@ -1,0 +1,16 @@
+public class SumOfN {
+    public static int sum(int n) {
+        if (n == 1) {
+            return 1;
+        }
+        int smallSum = sum(n - 1);
+        int totalSum = n + smallSum;
+        return totalSum;
+    }
+
+    public static void main(String[] args) {
+        int n = 5;
+        int result = sum(n);
+        System.out.println("Sum of first " + n + " numbers is " + result);
+    }
+}
