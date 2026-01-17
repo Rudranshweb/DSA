@@ -1,0 +1,26 @@
+public class PalindromeNumber {
+
+    static int rev = 0;
+
+    public static void reverse(int n) {
+        if (n == 0) {
+            return;
+        }
+        int lastDigit = n % 10;
+        rev = rev * 10 + lastDigit;
+        reverse(n / 10);
+    }
+
+    public static void main(String[] args) {
+        int n = 121;
+        int original = n;
+
+        reverse(n);
+
+        if (original == rev) {
+            System.out.println("Number is Palindrome");
+        } else {
+            System.out.println("Number is Not Palindrome");
+        }
+    }
+}
