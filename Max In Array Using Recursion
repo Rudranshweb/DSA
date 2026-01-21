@@ -1,0 +1,22 @@
+public class MaxInArray {
+
+    public static int findMax(int arr[], int i) {
+        if (i == arr.length - 1) {
+            return arr[i];
+        }
+
+        int maxInRest = findMax(arr, i + 1);
+
+        if (arr[i] > maxInRest) {
+            return arr[i];
+        } else {
+            return maxInRest;
+        }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {3, 7, 2, 9, 5};
+        int result = findMax(arr, 0);
+        System.out.println("Maximum element is " + result);
+    }
+}
