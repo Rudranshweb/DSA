@@ -1,0 +1,33 @@
+public class LastOccurrence {
+
+    public static int lastOcc(int arr[], int key, int i) {
+        if (i == arr.length) {
+            return -1;
+        }
+
+        int idx = lastOcc(arr, key, i + 1);
+
+        if (idx != -1) {
+            return idx;
+        }
+
+        if (arr[i] == key) {
+            return i;
+        }
+
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {1, 2, 3, 2, 5};
+        int key = 2;
+
+        int index = lastOcc(arr, key, 0);
+
+        if (index == -1) {
+            System.out.println("Key not found");
+        } else {
+            System.out.println("Last occurrence at index " + index);
+        }
+    }
+}
