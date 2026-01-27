@@ -1,0 +1,22 @@
+public class AllIndices {
+
+    public static void allIndices(int arr[], int key, int i) {
+        if (i == arr.length) {
+            return;
+        }
+
+        if (arr[i] == key) {
+            System.out.print(i + " ");
+        }
+
+        allIndices(arr, key, i + 1);
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {2, 3, 2, 4, 2, 5};
+        int key = 2;
+
+        System.out.print("Indices: ");
+        allIndices(arr, key, 0);
+    }
+}
