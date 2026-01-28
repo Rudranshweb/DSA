@@ -1,0 +1,31 @@
+public class BinarySearchRecursion {
+
+    public static int binarySearch(int arr[], int key, int start, int end) {
+        if (start > end) {
+            return -1;
+        }
+
+        int mid = start + (end - start) / 2;
+
+        if (arr[mid] == key) {
+            return mid;
+        } else if (key < arr[mid]) {
+            return binarySearch(arr, key, start, mid - 1);
+        } else {
+            return binarySearch(arr, key, mid + 1, end);
+        }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = {2, 4, 6, 8, 10, 12, 14};
+        int key = 10;
+
+        int index = binarySearch(arr, key, 0, arr.length - 1);
+
+        if (index == -1) {
+            System.out.println("Key not found");
+        } else {
+            System.out.println("Key found at index " + index);
+        }
+    }
+}
