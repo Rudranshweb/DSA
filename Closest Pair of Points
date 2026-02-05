@@ -1,0 +1,60 @@
+import java.util.*;
+
+class ClosestPair {
+
+    static class Point {
+        int x, y;
+        Point(int x, int y) {
+            this.x = x;
+            this.y = y;
+        }
+    }
+
+    static double dist(Point a, Point b) {
+        return Math.sqrt((a.x - b.x)*(a.x - b.x) + (a.y - b.y)*(a.y - b.y));
+    }
+
+    static double brute(Point[] p, int n) {
+        double min = Double.MAX_VALUE;
+        for (int i = 0; i < n; i++)
+            for (int j = i + 1; j < n; j++)
+                min = Math.min(min, dist(p[i], p[j]));
+        return min;
+    }
+
+    static double closest(Point[] p, int l, int r) {
+        if (r - l <= 3)
+            return brute(Arrays.copyOfRange(p, l, r), r - l);
+
+        int m = (l + r) / 2;
+        double d = Math.min(closest(p, l, m), closest(p, m, r));
+
+        ArrayList<Point> strip = new ArrayList<>();
+        for (int i = l; i < r; i++)
+            if (Math.abs(p[i].x - p[m].x) < d)
+                strip.add(p[i]);
+
+        strip.sort(Comparator.comparingInt(a -> a.y));
+
+        for (int i = 0; i < strip.size(); i++)
+            for (int j = i + 1; j < strip.size() && (strip.get(j).y - strip.get(i).y) < d; j++)
+                d = Math.min(d, dist(strip.get(i), strip.get(j)));
+
+        return d;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        Point[] p = new Point[n];
+
+        for (int i = 0; i < n; i++)
+            p[i] = new Point(sc.nextInt(), sc.nextInt());
+
+        Arrays.sort(p, Comparator.comparingInt(a -> a.x));
+
+        System.out.println(closest(p, 0, n));
+        sc.close();
+    }
+}
