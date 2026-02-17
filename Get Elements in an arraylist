@@ -1,0 +1,13 @@
+import java.util.ArrayList;
+
+public class GetElementExample {
+    public static void main(String[] args) {
+
+        ArrayList<String> topics = new ArrayList<>();
+        topics.add("HTML");
+        topics.add("CSS");
+        topics.add("JavaScript");
+
+        System.out.println("Element at index 1: " + topics.get(1));
+    }
+}
