@@ -1,0 +1,25 @@
+class QueueArray {
+    int front = 0, rear = 0, size = 100;
+    int[] arr = new int[size];
+
+    void enqueue(int x) {
+        if (rear == size) {
+            System.out.println("Queue Overflow");
+            return;
+        }
+        arr[rear++] = x;
+    }
+
+    int dequeue() {
+        if (front == rear) {
+            System.out.println("Queue Underflow");
+            return -1;
+        }
+        return arr[front++];
+    }
+
+    int peek() {
+        if (front == rear) return -1;
+        return arr[front];
+    }
+}
