@@ -1,0 +1,49 @@
+import java.util.*;
+
+class Pair {
+    int val, row, col;
+
+    Pair(int v, int r, int c) {
+        val = v;
+        row = r;
+        col = c;
+    }
+}
+
+public class MergeKSorted {
+
+    static void merge(int arr[][]) {
+
+        int k = arr.length;
+
+        PriorityQueue<Pair> pq = new PriorityQueue<>(
+            (a, b) -> a.val - b.val
+        );
+
+        for (int i = 0; i < k; i++) {
+            pq.add(new Pair(arr[i][0], i, 0));
+        }
+
+        while (!pq.isEmpty()) {
+
+            Pair p = pq.poll();
+
+            System.out.print(p.val + " ");
+
+            if (p.col + 1 < arr[p.row].length) {
+                pq.add(new Pair(arr[p.row][p.col + 1], p.row, p.col + 1));
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        int arr[][] = {
+            {1,4,7},
+            {2,5,8},
+            {3,6,9}
+        };
+
+        merge(arr);
+    }
+}
