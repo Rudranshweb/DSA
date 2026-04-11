@@ -1,0 +1,38 @@
+import java.util.*;
+
+public class MedianStream {
+
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+    PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
+
+    void addNum(int num) {
+
+        maxHeap.add(num);
+        minHeap.add(maxHeap.poll());
+
+        if (minHeap.size() > maxHeap.size()) {
+            maxHeap.add(minHeap.poll());
+        }
+    }
+
+    double findMedian() {
+
+        if (maxHeap.size() > minHeap.size()) {
+            return maxHeap.peek();
+        }
+
+        return (maxHeap.peek() + minHeap.peek()) / 2.0;
+    }
+
+    public static void main(String[] args) {
+
+        MedianStream ms = new MedianStream();
+
+        ms.addNum(1);
+        ms.addNum(2);
+        System.out.println(ms.findMedian());
+
+        ms.addNum(3);
+        System.out.println(ms.findMedian());
+    }
+}
