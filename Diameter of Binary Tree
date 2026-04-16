@@ -1,0 +1,57 @@
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+class Pair {
+    int height;
+    int diameter;
+
+    Pair(int h, int d) {
+        height = h;
+        diameter = d;
+    }
+}
+
+public class DiameterTree {
+
+    Node root;
+
+    Pair diameter(Node root) {
+
+        if (root == null) {
+            return new Pair(0, 0);
+        }
+
+        Pair left = diameter(root.left);
+        Pair right = diameter(root.right);
+
+        int height = Math.max(left.height, right.height) + 1;
+
+        int d1 = left.diameter;
+        int d2 = right.diameter;
+        int d3 = left.height + right.height + 1;
+
+        int dia = Math.max(d3, Math.max(d1, d2));
+
+        return new Pair(height, dia);
+    }
+
+    public static void main(String[] args) {
+
+        DiameterTree tree = new DiameterTree();
+
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.left.left = new Node(4);
+        tree.root.left.right = new Node(5);
+
+        System.out.println(tree.diameter(tree.root).diameter);
+    }
+}
