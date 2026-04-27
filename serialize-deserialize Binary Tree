@@ -1,0 +1,79 @@
+import java.util.*;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class SerializeTree {
+
+    Node root;
+    int index = 0;
+
+    void serialize(Node root, StringBuilder sb) {
+
+        if (root == null) {
+            sb.append("N,");
+            return;
+        }
+
+        sb.append(root.data).append(",");
+
+        serialize(root.left, sb);
+        serialize(root.right, sb);
+    }
+
+    Node deserialize(String arr[]) {
+
+        if (index >= arr.length || arr[index].equals("N")) {
+            index++;
+            return null;
+        }
+
+        Node node = new Node(Integer.parseInt(arr[index++]));
+
+        node.left = deserialize(arr);
+        node.right = deserialize(arr);
+
+        return node;
+    }
+
+    void inorder(Node root) {
+
+        if (root == null) return;
+
+        inorder(root.left);
+        System.out.print(root.data + " ");
+        inorder(root.right);
+    }
+
+    public static void main(String[] args) {
+
+        SerializeTree tree = new SerializeTree();
+
+        tree.root = new Node(1);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(3);
+        tree.root.right.left = new Node(4);
+        tree.root.right.right = new Node(5);
+
+        StringBuilder sb = new StringBuilder();
+
+        tree.serialize(tree.root, sb);
+
+        String data = sb.toString();
+
+        System.out.println(data);
+
+        String arr[] = data.split(",");
+
+        Node newRoot = tree.deserialize(arr);
+
+        tree.inorder(newRoot);
+    }
+}
