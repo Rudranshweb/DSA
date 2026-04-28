@@ -1,0 +1,56 @@
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class MorrisTraversal {
+
+    Node root;
+
+    void inorder(Node root) {
+
+        Node curr = root;
+
+        while (curr != null) {
+
+            if (curr.left == null) {
+                System.out.print(curr.data + " ");
+                curr = curr.right;
+            } else {
+
+                Node pred = curr.left;
+
+                while (pred.right != null && pred.right != curr) {
+                    pred = pred.right;
+                }
+
+                if (pred.right == null) {
+                    pred.right = curr;
+                    curr = curr.left;
+                } else {
+                    pred.right = null;
+                    System.out.print(curr.data + " ");
+                    curr = curr.right;
+                }
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+
+        MorrisTraversal tree = new MorrisTraversal();
+
+        tree.root = new Node(4);
+        tree.root.left = new Node(2);
+        tree.root.right = new Node(5);
+        tree.root.left.left = new Node(1);
+        tree.root.left.right = new Node(3);
+
+        tree.inorder(tree.root);
+    }
+}
