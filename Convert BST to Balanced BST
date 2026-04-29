@@ -1,0 +1,66 @@
+import java.util.*;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class BalanceBST {
+
+    Node root;
+
+    void inorder(Node root, ArrayList<Integer> list) {
+
+        if (root == null) return;
+
+        inorder(root.left, list);
+        list.add(root.data);
+        inorder(root.right, list);
+    }
+
+    Node build(ArrayList<Integer> list, int start, int end) {
+
+        if (start > end) return null;
+
+        int mid = (start + end) / 2;
+
+        Node root = new Node(list.get(mid));
+
+        root.left = build(list, start, mid - 1);
+        root.right = build(list, mid + 1, end);
+
+        return root;
+    }
+
+    void preorder(Node root) {
+
+        if (root == null) return;
+
+        System.out.print(root.data + " ");
+        preorder(root.left);
+        preorder(root.right);
+    }
+
+    public static void main(String[] args) {
+
+        BalanceBST tree = new BalanceBST();
+
+        tree.root = new Node(1);
+        tree.root.right = new Node(2);
+        tree.root.right.right = new Node(3);
+        tree.root.right.right.right = new Node(4);
+
+        ArrayList<Integer> list = new ArrayList<>();
+
+        tree.inorder(tree.root, list);
+
+        Node newRoot = tree.build(list, 0, list.size() - 1);
+
+        tree.preorder(newRoot);
+    }
+}
