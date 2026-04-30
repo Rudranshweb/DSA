@@ -1,0 +1,80 @@
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int data) {
+        this.data = data;
+        left = right = null;
+    }
+}
+
+public class RecoverBST {
+
+    Node first = null;
+    Node middle = null;
+    Node last = null;
+    Node prev = null;
+
+    void inorder(Node root) {
+
+        if (root == null) return;
+
+        inorder(root.left);
+
+        if (prev != null && root.data < prev.data) {
+
+            if (first == null) {
+                first = prev;
+                middle = root;
+            } else {
+                last = root;
+            }
+        }
+
+        prev = root;
+
+        inorder(root.right);
+    }
+
+    void recover(Node root) {
+
+        inorder(root);
+
+        if (first != null && last != null) {
+            int temp = first.data;
+            first.data = last.data;
+            last.data = temp;
+        }
+        else if (first != null && middle != null) {
+            int temp = first.data;
+            first.data = middle.data;
+            middle.data = temp;
+        }
+    }
+
+    void inorderPrint(Node root) {
+
+        if (root == null) return;
+
+        inorderPrint(root.left);
+        System.out.print(root.data + " ");
+        inorderPrint(root.right);
+    }
+
+    public static void main(String[] args) {
+
+        RecoverBST tree = new RecoverBST();
+
+        tree.root = new Node(3);
+        tree.root.left = new Node(1);
+        tree.root.right = new Node(4);
+        tree.root.right.left = new Node(2);
+
+        tree.inorderPrint(tree.root);
+        System.out.println();
+
+        tree.recover(tree.root);
+
+        tree.inorderPrint(tree.root);
+    }
+}
